@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
-import InCallManager from 'react-native-incall-manager';
+import InCallManager from '@novartc/react-native-incall-manager';
 
 export default function App() {
   const [isCallActive, setIsCallActive] = useState(false);

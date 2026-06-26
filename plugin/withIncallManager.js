@@ -38,7 +38,7 @@ function addIosPod(config) {
       if (!fs.existsSync(podfilePath)) return config;
 
       let podfileContent = fs.readFileSync(podfilePath, 'utf8');
-      const podLine = `pod 'ReactNativeIncallManager', :path => '../node_modules/react-native-incall-manager'`;
+      const podLine = `pod 'ReactNativeIncallManager', :path => '../node_modules/@novartc/react-native-incall-manager'`;
 
       if (!podfileContent.includes(podLine)) {
         podfileContent = podfileContent.replace(
@@ -63,10 +63,10 @@ function addAndroidNativeLinking(config) {
       // --- settings.gradle ---
       if (fs.existsSync(settingsGradlePath)) {
         let settingsGradle = fs.readFileSync(settingsGradlePath, 'utf8');
-        if (!settingsGradle.includes("react-native-incall-manager")) {
+        if (!settingsGradle.includes("novartc_react-native-incall-manager")) {
           settingsGradle += `
-include ':react-native-incall-manager'
-project(':react-native-incall-manager').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-incall-manager/android')
+include ':novartc_react-native-incall-manager'
+project(':novartc_react-native-incall-manager').projectDir = new File(rootProject.projectDir, '../node_modules/@novartc/react-native-incall-manager/android')
 `;
           fs.writeFileSync(settingsGradlePath, settingsGradle);
         }
@@ -75,11 +75,11 @@ project(':react-native-incall-manager').projectDir = new File(rootProject.projec
       // --- app/build.gradle ---
       if (fs.existsSync(buildGradlePath)) {
         let buildGradle = fs.readFileSync(buildGradlePath, 'utf8');
-        if (!buildGradle.includes("implementation(project(':react-native-incall-manager'))")) {
+        if (!buildGradle.includes("implementation(project(':novartc_react-native-incall-manager'))")) {
           buildGradle = buildGradle.replace(
             /(dependencies\s*{[\s\S]*?)(^\})/m,
             (match, depsBlock, closingBrace) => {
-              return `${depsBlock}    implementation(project(':react-native-incall-manager'))\n${closingBrace}`;
+              return `${depsBlock}    implementation(project(':novartc_react-native-incall-manager'))\n${closingBrace}`;
             }
           );
           fs.writeFileSync(buildGradlePath, buildGradle);

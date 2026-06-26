@@ -1,17 +1,17 @@
 # expo-config-plugin-incall-manager
 
-📱 **A Config Plugin for integrating `react-native-incall-manager` into Expo or React Native projects** — automatically adds required permissions, Podfile entries, and Android native linking.
+📱 **A Config Plugin for integrating `@novartc/react-native-incall-manager` into Expo or React Native projects** — automatically adds required permissions, Podfile entries, and Android native linking.
 
 ## 🚀 Installation
 
 ```bash
-npm install react-native-incall-manager expo-config-plugin-incall-manager
+npm install @novartc/react-native-incall-manager @novartc/expo-config-plugin-incall-manager
 ```
 
 or
 
 ```bash
-yarn add react-native-incall-manager expo-config-plugin-incall-manager
+yarn add @novartc/react-native-incall-manager @novartc/expo-config-plugin-incall-manager
 ```
 
 ## 🧩 Usage (in app.json or app.config.js)
@@ -58,9 +58,9 @@ module.exports = {
 ✅ **Modifies settings.gradle and build.gradle to include:**
 
 ```gradle
-include ':react-native-incall-manager'
-project(':react-native-incall-manager').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-incall-manager/android')
-implementation(project(':react-native-incall-manager'))
+include ':novartc_react-native-incall-manager'
+project(':novartc_react-native-incall-manager').projectDir = new File(rootProject.projectDir, '../node_modules/@novartc/react-native-incall-manager/android')
+implementation(project(':novartc_react-native-incall-manager'))
 ```
 
 ✅ **Updates MainApplication.java with:**
@@ -73,21 +73,21 @@ packages.add(new InCallManagerPackage());
 ✅ **Adds iOS Pod dependency:**
 
 ```ruby
-pod 'ReactNativeIncallManager', :path => '../node_modules/react-native-incall-manager'
+pod 'ReactNativeIncallManager', :path => '../node_modules/@novartc/react-native-incall-manager'
 ```
 
 ## ⚠️ Requirements
 
 - Expo SDK 48+ or React Native 0.70+
 - EAS Build (for managed workflow)
-- `react-native-incall-manager` installed in your project
+- `@novartc/react-native-incall-manager` installed in your project
 
 ## 📱 Usage in your React Native code
 
-After installing and configuring the plugin, you can use `react-native-incall-manager` in your app:
+After installing and configuring the plugin, you can use `@novartc/react-native-incall-manager` in your app:
 
 ```javascript
-import InCallManager from 'react-native-incall-manager';
+import InCallManager from '@novartc/react-native-incall-manager';
 
 // Start call management
 InCallManager.start({media: 'audio'});
@@ -145,7 +145,7 @@ MIT © Ahsan Zia
 ### Plugin Not Working
 - Make sure you've run `expo prebuild --clean` after adding the plugin
 - Verify the plugin is listed in your `app.json` or `app.config.js`
-- Check that `react-native-incall-manager` is installed as a dependency
+- Check that `@novartc/react-native-incall-manager` is installed as a dependency
 
 ### Need Help?
 Open an issue on GitHub with:
