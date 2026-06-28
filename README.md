@@ -53,7 +53,11 @@ module.exports = {
 <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 ```
+
+The native `@novartc/react-native-incall-manager` Android library declares its own foreground service, so this plugin only needs to ensure the host app has the required permissions. Apps targeting Android 13+ must still request notification permission at runtime before Android can show the foreground-service notification.
 
 ✅ **Modifies settings.gradle and build.gradle to include:**
 

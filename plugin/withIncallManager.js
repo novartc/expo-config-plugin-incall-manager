@@ -17,15 +17,25 @@ const ANDROID_PERMISSIONS = [
   'android.permission.BLUETOOTH_ADVERTISE',
   'android.permission.WAKE_LOCK',
   'android.permission.FOREGROUND_SERVICE',
+  'android.permission.FOREGROUND_SERVICE_MICROPHONE',
+  'android.permission.POST_NOTIFICATIONS',
 ];
 
 function addAndroidPermissions(config) {
   return withAndroidManifest(config, async (config) => {
     const manifest = config.modResults.manifest;
-    manifest['uses-permission'] = [
-      ...(manifest['uses-permission'] || []),
-      ...ANDROID_PERMISSIONS.map((name) => ({ $: { 'android:name': name } })),
-    ];
+    const existingPermissions = manifest['uses-permission'] || [];
+    const existingPermissionNames = new Set(
+      existingPermissions
+        .map((permission) => permission.$ && permission.$['android:name'])
+        .filter(Boolean)
+    );
+
+    const permissionsToAdd = ANDROID_PERMISSIONS
+      .filter((name) => !existingPermissionNames.has(name))
+      .map((name) => ({ $: { 'android:name': name } }));
+
+    manifest['uses-permission'] = [...existingPermissions, ...permissionsToAdd];
     return config;
   });
 }
